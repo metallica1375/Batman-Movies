@@ -14,6 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+        vectorDrawables.useSupportLibrary true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -71,9 +72,10 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.12.13'
     implementation 'com.squareup.okhttp3:okhttp:3.12.13'
 
-    //Splash
-    implementation 'androidx.core:core-splashscreen:1.1.0-alpha01'
-
     //Krate
     implementation 'hu.autsoft:krate:2.0.0'
+    implementation 'hu.autsoft:krate-kotlinx:2.0.0'
+    implementation 'hu.autsoft:krate-gson:2.0.0'
+
+    implementation 'io.karn:khttp-android:0.1.0'
 }

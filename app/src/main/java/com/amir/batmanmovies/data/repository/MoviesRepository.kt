@@ -23,8 +23,8 @@ class MoviesRepository(
             if (moviesList.isSuccessful) {
                 moviesDB.Movies = moviesList.body()!!.Search
                 Result.success(moviesList.body()!!.Search)
-            }
-            Result.failure(Throwable(moviesList.message()))
+            } else
+                Result.failure(Throwable(moviesList.message()))
 
         } catch (e: Exception) {
             Result.failure(Throwable("connection_failed. please retry!"))

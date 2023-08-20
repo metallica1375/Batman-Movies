@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.amir.batmanmovies.MainActivity
 import com.amir.batmanmovies.databinding.ActivitySplashBinding
 import com.amir.batmanmovies.ui.viewmodel.SplashViewModel
 import com.amir.batmanmovies.ui.viewmodelfactory.ContextBasedViewModelFactory
@@ -41,7 +40,6 @@ class SplashActivity : AppCompatActivity() {
         splashViewModel.returnMoviesList().observe(this) { result ->
             result.onSuccess {
                 binding.progressBar.visibility = View.GONE
-                toastMessage(it!!.size.toString())
                 startHomeActivity()
                 finish()
             }

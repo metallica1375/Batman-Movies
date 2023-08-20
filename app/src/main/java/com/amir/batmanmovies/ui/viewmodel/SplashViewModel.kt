@@ -36,16 +36,12 @@ class SplashViewModel(private val context: Context) : ViewModel() {
 
     private fun getMoviesList(): LiveData<Result<List<Movies>?>> {
         val liveData = MutableLiveData<Result<List<Movies>?>>()
-        try {
             val result = moviesRepository.getMoviesList()
             if (result.isEmpty())
                 liveData.postValue(Result.failure(Throwable("Internet connection needed to fetch data for the first time")))
             else
                 liveData.postValue(Result.success(result))
 
-        } catch (e: Exception) {
-            liveData.postValue(Result.failure(Throwable(e.message)))
-        }
         return liveData
     }
 

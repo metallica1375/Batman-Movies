@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        style="@style/CardView"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:visibility="gone"
         android:id="@+id/retry_button"
         android:layout_marginTop="20dp"

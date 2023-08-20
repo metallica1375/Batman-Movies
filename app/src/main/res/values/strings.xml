@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Batman Movies</string>
     <string name="retry">Try Again!</string>
+    <string name="night_mode">Night Mode</string>
 </resources>

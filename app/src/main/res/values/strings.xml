@@ -2,4 +2,9 @@
     <string name="app_name">Batman Movies</string>
     <string name="retry">Try Again!</string>
     <string name="night_mode">Night Mode</string>
+    <string name="over_view">Overview</string>
+    <string name="director">Director</string>
+    <string name="duration">Duration</string>
+    <string name="release_date">Release Date</string>
+    <string name="title">Title</string>
 </resources>

@@ -7,7 +7,8 @@ import retrofit2.Response
 
 class MoviesListClient {
 
-    private val apiRequest : MoviesListRequest = MoviesApi.getClient().create(MoviesListRequest::class.java)
+    private val apiRequest: MoviesListRequest =
+        MoviesApi.getClient().create(MoviesListRequest::class.java)
 
     suspend fun getMoviesList(apiKey: String, filmName: String): Response<Search> {
         return apiRequest.getMoviesList(apiKey, filmName)

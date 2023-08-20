@@ -36,10 +36,11 @@ class MoviesListAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun setupBindings(movie: Movies) {
-            binding.movieTitle.text = movie.title
-            binding.movieReleaseDate.text = movie.year
+            binding.movieTitle.text = movie.Title
+            binding.movieReleaseDate.text = movie.Year
             binding.movieType.text = movie.Type
-            Glide.with(binding.moviePoster.context).load(movie.Poster).fitCenter().into(binding.moviePoster)
+            Glide.with(binding.moviePoster.context).load(movie.Poster).fitCenter()
+                .into(binding.moviePoster)
         }
 
         companion object {

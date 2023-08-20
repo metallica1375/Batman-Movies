@@ -8,21 +8,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.amir.batmanmovies.data.model.Movies
+import com.amir.batmanmovies.data.model.Movie
 import com.amir.batmanmovies.data.repository.MoviesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
-class SplashViewModel(private val context: Context) : ViewModel() {
+class MovieDetailsViewModel(private val context: Context) : ViewModel() {
 
     private val moviesRepository = MoviesRepository(context)
 
-    private fun fetchMoviesList(): LiveData<Result<List<Movies>?>> {
-        val liveData = MutableLiveData<Result<List<Movies>?>>()
+    private fun fetchMovieDetails(imdbId: String): LiveData<Result<Movie?>> {
+        val liveData = MutableLiveData<Result<Movie?>>()
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val result = moviesRepository.fetchMoviesList("3e974fca", "batman")
+                val result = moviesRepository.fetchMovieDetails("3e974fca", imdbId)
                 liveData.postValue(result)
             } catch (e: Exception) {
                 liveData.postValue(Result.failure(Throwable(e.message)))
@@ -32,10 +31,10 @@ class SplashViewModel(private val context: Context) : ViewModel() {
         return liveData
     }
 
-    private fun getMoviesList(): LiveData<Result<List<Movies>?>> {
-        val liveData = MutableLiveData<Result<List<Movies>?>>()
-        val result = moviesRepository.getMoviesList()
-        if (result.isEmpty())
+    private fun getMovieDetails(imdbId: String): LiveData<Result<Movie?>> {
+        val liveData = MutableLiveData<Result<Movie?>>()
+        val result = moviesRepository.getMovieDetails(imdbId)
+        if (result == null)
             liveData.postValue(Result.failure(Throwable("Internet connection needed to fetch data for the first time")))
         else
             liveData.postValue(Result.success(result))
@@ -43,15 +42,11 @@ class SplashViewModel(private val context: Context) : ViewModel() {
         return liveData
     }
 
-    fun returnMoviesList(): LiveData<Result<List<Movies>?>> {
+    fun returnMoviesList(imdbId: String): LiveData<Result<Movie?>> {
         return if (checkForInternet())
-            fetchMoviesList()
+            fetchMovieDetails(imdbId)
         else
-            getMoviesList()
-    }
-
-    fun setupAppSettings(): Boolean {
-        return moviesRepository.getAppSettings()
+            getMovieDetails(imdbId)
     }
 
     private fun checkForInternet(): Boolean {
@@ -76,6 +71,4 @@ class SplashViewModel(private val context: Context) : ViewModel() {
             return networkInfo.isConnected
         }
     }
-
-
 }

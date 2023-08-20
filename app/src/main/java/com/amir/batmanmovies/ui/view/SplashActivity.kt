@@ -1,19 +1,21 @@
 package com.amir.batmanmovies.ui.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import com.amir.batmanmovies.databinding.ActivitySplashBinding
 import com.amir.batmanmovies.ui.viewmodel.SplashViewModel
 import com.amir.batmanmovies.ui.viewmodelfactory.ContextBasedViewModelFactory
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashBinding
-
     private lateinit var splashViewModel: SplashViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,9 +25,16 @@ class SplashActivity : AppCompatActivity() {
 
         prepareViewModel()
         setViewBindings()
+        setupAppSettings()
         getMoviesList()
-//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
+    }
+
+    private fun setupAppSettings() {
+        if (splashViewModel.setupAppSettings())
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 
     private fun setViewBindings() {
@@ -52,14 +61,15 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    private fun startHomeActivity()  {
-        val intent = Intent(this, MainActivity::class.java)
+    private fun startHomeActivity() {
+        val intent = Intent(this, MoviesListActivity::class.java)
         startActivity(intent)
     }
 
     private fun prepareViewModel() {
         val contextBasedViewModelFactory = ContextBasedViewModelFactory(this)
-        splashViewModel = ViewModelProvider(this, contextBasedViewModelFactory)[SplashViewModel::class.java]
+        splashViewModel =
+            ViewModelProvider(this, contextBasedViewModelFactory)[SplashViewModel::class.java]
     }
 
     private fun toastMessage(message: String) {

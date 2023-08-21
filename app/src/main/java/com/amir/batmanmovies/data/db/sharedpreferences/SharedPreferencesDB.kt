@@ -26,6 +26,6 @@ class SharedPreferencesDB(context: Context) : SimpleKrate(context, "main.db"), M
     ).withDefault(
         mutableMapOf()
     )
-    override var darkMode: Boolean by booleanPref(key = "dark_mode").withDefault(false)
+    override var darkMode: Boolean by booleanPref(key = "dark_mode").withDefault(true)
 
 }
